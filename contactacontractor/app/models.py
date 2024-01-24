@@ -30,12 +30,16 @@ class Quote(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     accepted = models.BooleanField()
 
-
 class Dispute(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     reason = models.TextField(max_length=100)
 
+class Message(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    text = models.TextField()
+    
 class Rating(models.Model):
     rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rater")
     ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ratee")
