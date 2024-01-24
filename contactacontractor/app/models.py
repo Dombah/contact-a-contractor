@@ -40,3 +40,9 @@ class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
     text = models.TextField()
+    
+class Rating(models.Models):
+    rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rater")
+    ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ratee")
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    rating = models.IntegerField()
