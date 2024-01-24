@@ -36,7 +36,7 @@ class Dispute(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     reason = models.TextField(max_length=100)
 
-class Rating(models.Models):
+class Rating(models.Model):
     rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rater")
     ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ratee")
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
