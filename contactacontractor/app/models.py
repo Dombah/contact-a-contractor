@@ -23,9 +23,16 @@ class Job(models.Model):
     budget = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(max_length=100, default="available")
     is_completed = models.BooleanField()
-    
+
 class Quote(models.Model):
     contractor = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job,on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     accepted = models.BooleanField()
+
+
+class Dispute(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    reason = models.TextField(max_length=100)
+
