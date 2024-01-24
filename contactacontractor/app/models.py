@@ -30,7 +30,6 @@ class Quote(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     accepted = models.BooleanField()
 
-
 class Dispute(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
