@@ -2,18 +2,16 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-# Create your models here.
 class Account(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     balance = models.DecimalField(max_digits=8, decimal_places=2)
     contractor = models.BooleanField()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.id} - {self.first_name} {self.last_name}"
     
-
 class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -23,6 +21,8 @@ class Job(models.Model):
     budget = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(max_length=100, default="available")
     is_completed = models.BooleanField()
+    def __str__(self):
+        return f"{self.user.account.first_name} {self.user.account.last_name} - {self.title}"
 
 class Quote(models.Model):
     contractor = models.ForeignKey(User, on_delete=models.CASCADE)
