@@ -10,7 +10,7 @@
             <ul>
                 <h1>Welcome to Contact-a-Contractor</h1>
                 {% if request.user.is_superuser %}
-                    <a href="/admin">Admin Dashboard</a>
+                    <li><a href="/admin">Admin Dashboard</a></li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     Logged in: {{ request.user.username }}
