@@ -9,8 +9,16 @@
         <nav>
             <ul>
                 <h1>Welcome to Contact-a-Contractor</h1>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                {% if request.user.is_superuser %}
+                    <li><a href="admin/">Admin Dashboard</a></li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                    Logged in: {{ request.user.username}}
+                    <li><a href="{% url 'logout'}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
