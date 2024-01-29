@@ -2,6 +2,20 @@
 
 {% block content %}
 
-    <h1 style="font-weight: bold; text-transform: capitalize;">{{account.user.username}}'s Profile</h1>
-
+    <h1 style="text-transform: capitalize;">{{account.user.username}}'s Profile</h1>
+    <div>
+        <h2>Profile Information</h2>
+        <p>First Name: {{account.first_name}}</p>
+        <p>Last Name: {{account.last_name}}</p>
+        <p>Email: {{account.user.email}}</p>
+        <p>Rating: <!-- to be implemented --></p>
+    </div>
+    <div>
+        <div>
+            <h2 style="text-transform: capitalize;">{{account.user.username}}'s Accepted Jobs</h2>
+        </div>
+        <div>
+            <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
+        </div>
+    </div>
 {% endblock content %}
