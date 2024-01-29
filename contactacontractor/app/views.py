@@ -61,3 +61,10 @@ def new_job(request):
             )
       context = {}
       return render(request, 'app/new_job.html', context)
+
+def contractor_dashboard(request):
+      account = Account.objects.get(user = request.user)
+      context = {
+            'account': account
+      }
+      return render(request, "registration/contractor_dashboard.html", context)
