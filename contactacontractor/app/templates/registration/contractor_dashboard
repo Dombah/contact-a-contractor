@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>User Dashboard</h1>
+    <h1>Contractor Dashboard</h1>
     <div>
         <h2>Account Information</h2>
         <p>Username: {{ account.user.username }}</p>
@@ -10,18 +10,12 @@
         <p>Balance: {{ account.balance }} $</p>
     </div>
     <div>
-        <h2>Your Jobs</h2>
-        {% for job in jobs %}
-            <div>
-                <h3>{{ job.title }}</h3>
-                <p>{{ job.description }}</p>
-            </div>
-        {% endfor %}
+        <h2>Submitted Bids</h2>
     </div>
     <div>
-        <h2>Your Job Quotes</h2>
+        <h2>Assigned Jobs</h2>
     </div>
     <div>
-        <h2>Your Messages</h2>
+        <h2>Completed Jobs</h2>
     </div>
 {% endblock content %}
