@@ -27,21 +27,21 @@ def register(request):
     context = {}
     return render(request, "registration/register.html", context)
 
-def dashboard(request):
+def user_dashboard(request):
     account = Account.objects.get(user = request.user)
     jobs = [job for job in Job.objects.all() if job.user.username == request.user.username]
     context = {
           'account': account,
           'jobs': jobs
     }
-    return render(request, "registration/dashboard.html", context)
+    return render(request, "registration/user_dashboard.html", context)
 
-def information(request):
+def user_profile(request):
     account = Account.objects.get(user = request.user)
     context = {
           'account': account
     }
-    return render(request, "registration/information.html", context)
+    return render(request, "registration/user_profile.html", context)
 
 def new_job(request):
       if request.method == "POST":
@@ -57,7 +57,7 @@ def new_job(request):
             job.save()
 
             return HttpResponseRedirect(
-                  redirect_to= '/account/dashboard/'
+                  redirect_to= '/account/user_dashboard/'
             )
       context = {}
       return render(request, 'app/new_job.html', context)

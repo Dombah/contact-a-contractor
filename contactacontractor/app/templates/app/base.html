@@ -16,8 +16,8 @@
                     {% if request.user.is_superuser %}
                         <li><a href="/admin">Admin Dashboard</a></li>
                     {% else %}
-                        <li><a href="{% url 'dashboard' %}">User Dashboard</a></li>
-                        <li><a href="{% url 'information' %}">User Profile</a></li>
+                        <li><a href="{% url 'user_dashboard' %}">User Dashboard</a></li>
+                        <li><a href="{% url 'user_profile' %}">User Profile</a></li>
                     {% endif %}
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>

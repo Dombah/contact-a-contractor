@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.views import home, register, dashboard, information, new_job
+from app.views import home, register, user_dashboard, user_profile, new_job
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
-    path('account/dashboard/', dashboard, name='dashboard'),
-    path('account/information/', information, name='information'),
+    path('account/user_dashboard/', user_dashboard, name='user_dashboard'),
+    path('account/user_profile/', user_profile, name='user_profile'),
     path('jobs/new', new_job, name='new_job')
 ]
