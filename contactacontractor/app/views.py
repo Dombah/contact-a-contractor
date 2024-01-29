@@ -28,5 +28,8 @@ def register(request):
     return render(request, "registration/register.html", context)
 
 def dashboard(request):
-    context = {}
+    account = Account.objects.get(user = request.user)
+    context = {
+          'account': account
+    }
     return render(request, "registration/dashboard.html", context)

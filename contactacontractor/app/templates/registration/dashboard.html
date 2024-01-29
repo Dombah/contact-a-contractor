@@ -2,6 +2,20 @@
 
 {% block content %}
 
-    <h1>Accout Dashboard</h1>
-
+    <h1>Account Dashboard</h1>
+    <div>
+        <h2>Account Information</h2>
+        <p>Username: {{ account.user.username }}</p>
+        <p>Email: {{ account.user.email }}</p>
+        <p>Balance: {{ account.balance }} $</p>
+    </div>
+    <div>
+        <h2>Your Jobs</h2>
+    </div>
+    <div>
+        <h2>Your Job Quotes</h2>
+    </div>
+    <div>
+        <h2>Your Messages</h2>
+    </div>
 {% endblock content %}
