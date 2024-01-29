@@ -16,6 +16,7 @@
                         <li><a href="/admin">Admin Dashboard</a></li>
                     {% else %}
                         <li><a href="{% url 'dashboard' %}">User Dashboard</a></li>
+                        <li><a href="{% url 'information' %}">User Profile</a></li>
                     {% endif %}
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
