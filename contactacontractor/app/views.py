@@ -26,3 +26,7 @@ def register(request):
                 )
     context = {}
     return render(request, "registration/register.html", context)
+
+def dashboard(request):
+    context = {}
+    return render(request, "registration/dashboard.html", context)
