@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from app.models import Account
+from app.models import Account, Job
 from django.http import HttpResponseRedirect
 
 def home(request):
@@ -40,3 +40,22 @@ def information(request):
           'account': account
     }
     return render(request, "registration/information.html", context)
+
+def new_job(request):
+      if request.method == "POST":
+            user = request.user
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+            location = request.POST.get("location")
+            type = request.POST.get("type")
+            budget = request.POST.get("budget")
+            is_completed = False
+
+            job = Job(user = user, title = title, description = description, location = location, type = type, budget = budget, is_completed = is_completed)
+            job.save()
+
+            return HttpResponseRedirect(
+                  redirect_to= '/account/dashboard/'
+            )
+      context = {}
+      return render(request, 'app/new_job.html', context)
