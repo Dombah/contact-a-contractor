@@ -2,4 +2,12 @@
 
 {% block content %}
     <h1>This is new app on the block!</h1>
+    <div>
+        <h2>Post a new job</h2>
+        {% if request.user.is_authenticated %}
+            <p><a href="{% url 'new_job' %}">Post a Job</a></p>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a> to post a job</p>
+        {% endif %}
+    </div>
 {% endblock content %}
