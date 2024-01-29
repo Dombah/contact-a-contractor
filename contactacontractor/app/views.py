@@ -29,8 +29,10 @@ def register(request):
 
 def dashboard(request):
     account = Account.objects.get(user = request.user)
+    jobs = [job for job in Job.objects.all() if job.user.username == request.user.username]
     context = {
-          'account': account
+          'account': account,
+          'jobs': jobs
     }
     return render(request, "registration/dashboard.html", context)
 
