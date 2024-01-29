@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    <h1>Post new job</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="">Title: </label>
+        <input type="text" name="title" id=""> <br>
+        <label for="">Description: </label>
+        <input type="text" name="description" id=""> <br>
+        <label for="">Location: </label>
+        <input type="text" name="location" id=""> <br>
+        <div>
+            <label for="">Type: </label>
+            <input type="checkbox" name="type" id="" value="carpentry">Carpentry &nbsp
+            <input type="checkbox" name="type" id="" value="landscaping">landscaping &nbsp
+            <input type="checkbox" name="type" id="" value="plumbing">Plumbing &nbsp
+            <input type="checkbox" name="type" id="" value="construction">Construction &nbsp
+            <input type="checkbox" name="type" id="" value="roofing">Roofing &nbsp
+            <input type="checkbox" name="type" id="" value="masonry">Masonry &nbsp
+            <input type="checkbox" name="type" id="" value="demolition">Demolition &nbsp
+            <input type="checkbox" name="type" id="" value="plastering">Plastering &nbsp
+            <input type="checkbox" name="type" id="" value="painting">Painting &nbsp
+            <input type="checkbox" name="type" id="" value="tile and marble setting">Tile and marble setting &nbsp
+            <input type="checkbox" name="type" id="" value="hvac">HVAC &nbsp
+            <input type="checkbox" name="type" id="" value="electrician">Electrician &nbsp
+        </div>
+        <label for="">Budget: </label>
+        <input type="number" name="budget" id="" min="1"> <br>
+        <input type="submit" value="Post">
+    </form>
+
+{% endblock content %}
