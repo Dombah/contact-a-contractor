@@ -33,3 +33,10 @@ def dashboard(request):
           'account': account
     }
     return render(request, "registration/dashboard.html", context)
+
+def information(request):
+    account = Account.objects.get(user = request.user)
+    context = {
+          'account': account
+    }
+    return render(request, "registration/information.html", context)
