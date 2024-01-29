@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="">Username: </label>
+        <input type="text" name="username" id=""> <br>
+        <label for="">First Name: </label>
+        <input type="text" name="first_name" id=""> <br>
+        <label for="">Last Name: </label>
+        <input type="text" name="last_name" id=""> <br>
+        <label for="">Email: </label>
+        <input type="email" name="email" id=""> <br>
+        <label for="">Password: </label>
+        <input type="password" name="password" id=""> <br>
+        <label for="">Contractor: </label>
+        <input type="checkbox" name="contractor" id=""> <br>
+        <input type="submit" value="Register">
+    </form>
+{% endblock content %}
