@@ -49,6 +49,18 @@
         </div>
         <div>
             <h2>Your Submitted Quotes</h2>
+            {% for quote in your_quotes %}
+                <div style="border: 1px solid black;">
+                    <h3>{{ quote.job.title }}</h3>
+                    <p>{{ quote.job.description }}</p>
+                    <p>Quote: {{ quote.price }} $</p>
+                    {% if quote.accepted %}
+                        <p>Accepted</p>
+                    {% else %}
+                        <p>Not Accepted</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
         <div>
             <h2>Your Assigned Jobs</h2>
