@@ -24,6 +24,6 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('dashboard/', user_dashboard, name='user_dashboard'),
     path('profile/', user_profile, name='user_profile'),
-    path('dashboard/submit-dispute/<str:user>/<int:job_id>/', submit_dispute, name='submit_dispute'),
+    path('dashboard/submit-dispute/<int:job_id>/', submit_dispute, name='submit_dispute'),
 ]
 

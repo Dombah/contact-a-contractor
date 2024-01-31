@@ -21,13 +21,13 @@ def new_job(request):
             job.save()
 
             return HttpResponseRedirect(
-                  redirect_to= '/accounts/user_dashboard/'
+                  redirect_to= '/accounts/dashboard/'
             )
       context = {}
       return render(request, 'app/new_job.html', context)
 
 
-def submit_dispute(request, user, job_id):
+def submit_dispute(request, job_id):
     if request.method == "POST":
             user = request.user
             job = Job.objects.get(id = job_id)
@@ -36,7 +36,7 @@ def submit_dispute(request, user, job_id):
             dispute = Dispute(user = user, job = job, reason = reason)
             dispute.save()
             return HttpResponseRedirect(
-                  redirect_to= '/accounts/user_dashboard/'
+                  redirect_to= '/accounts/dashboard/'
             )
     context = {}
     return render(request, 'app/submit_dispute.html', context)
