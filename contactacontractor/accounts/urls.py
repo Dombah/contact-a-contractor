@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from accounts.views import register, user_dashboard, user_profile, contractor_dashboard, contractor_profile
+from accounts.views import register, user_dashboard, user_profile
 from app.views import submit_dispute
 
 app_name = "accounts"
