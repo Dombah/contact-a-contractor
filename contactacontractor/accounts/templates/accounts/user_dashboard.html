@@ -13,14 +13,14 @@
         <h2>Your Jobs</h2>
         {% for job in jobs %}
             <div style="border: 1px solid black;">
-                <h3>{{ job.title }}</h3>
-                <p>{{ job.description }}</p>
+                <h3>Title: {{ job.title }}</h3>
+                <p>Description: {{ job.description }}</p>
                 {% if job.is_completed %}
-                    <p>Completed</p>
+                    <p>Status: Completed</p>
                     <input type="button" value="Submit a dispute" onclick="window.location.href='/accounts/dashboard/submit-dispute/{{ job.id }}'">
                     <input type="button" value="Submit a review" onclick="window.location.href='/accounts/dashboard/submit-review/{{ job.id }}'">
                 {% else %}
-                    <p>Not Completed</p>
+                    <p>Status: Not Completed</p>
                 {% endif %}
             </div>
         {% endfor %}
@@ -29,8 +29,8 @@
         <h2>Your Job Quotes</h2>
         {% for quote in your_job_quotes %}
             <div style="border: 1px solid black;">
-                <h3>{{ quote.job.title }}</h3>
-                <p>{{ quote.job.description }}</p>
+                <h3>Title: {{ quote.job.title }}</h3>
+                <p>Description: {{ quote.job.description }}</p>
                 <p>Quote: {{ quote.price }} $</p>
                 <p>Contractor: {{quote.contractor}}</p>
             </div>
@@ -40,8 +40,8 @@
         <h2>Your Messages</h2>
         {% for message in messages %}
             <div style="border: 1px solid black;">
-                <h3>{{ message.sender }}:</h3>
-                <p>{{ message.text }}</p>
+                <h3>Sender: {{ message.sender }}:</h3>
+                <p>Message: {{ message.text }}</p>
                 <p><a href="{% url 'new_message' %}">Reply</a></p>
             </div>
         {% endfor %}
@@ -59,13 +59,13 @@
             <h2>Your Submitted Quotes</h2>
             {% for quote in your_quotes %}
                 <div style="border: 1px solid black;">
-                    <h3>{{ quote.job.title }}</h3>
-                    <p>{{ quote.job.description }}</p>
+                    <h3>Title: {{ quote.job.title }}</h3>
+                    <p>Description: {{ quote.job.description }}</p>
                     <p>Quote: {{ quote.price }} $</p>
                     {% if quote.accepted %}
-                        <p>Accepted</p>
+                        <p>Status: Accepted</p>
                     {% else %}
-                        <p>Not Accepted</p>
+                        <p>Status: Not Accepted</p>
                     {% endif %}
                 </div>
             {% endfor %}
