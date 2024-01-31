@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.urls import path
 from accounts.views import register, user_dashboard, user_profile, contractor_dashboard, contractor_profile
+from app.views import submit_dispute
 
 app_name = "accounts"
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     path('user_profile/', user_profile, name='user_profile'),
     path('contractor_dashboard/', contractor_dashboard, name='contractor_dashboard'),
     path('contractor_profile/', contractor_profile, name='contractor_profile'),
+    path('user_dashboard/submit_dispute/<str:user>/<int:job_id>/', submit_dispute, name='submit_dispute'),
 ]
