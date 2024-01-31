@@ -24,4 +24,26 @@
     <div>
         <h2>Your Messages</h2>
     </div>
+    <br>
+    {% if account.contractor %}
+    <h1>Contractor Dashboard</h1>
+        <div>
+            <h2>Account Information</h2>
+            <p>Username: {{ account.user.username }}</p>
+            <p>Email: {{ account.user.email }}</p>
+            <p>Balance: {{ account.balance }} $</p>
+        </div>
+        <div>
+            <h2>Your Submitted Bids</h2>
+        </div>
+        <div>
+            <h2>Your Assigned Jobs</h2>
+        </div>
+        <div>
+            <h2>Your Completed Jobs</h2>
+        </div>
+    {% else %}
+        <p><a href="#">Sign up</a> to be a contractor!</p>
+    {% endif %}
+
 {% endblock content %}

@@ -38,17 +38,3 @@ def user_profile(request):
           'account': account
     }
     return render(request, "accounts/user_profile.html", context)
-
-def contractor_dashboard(request):
-      account = Account.objects.get(user = request.user)
-      context = {
-            'account': account
-      }
-      return render(request, "accounts/contractor_dashboard.html", context)
-
-def contractor_profile(request):
-      account = Account.objects.get(user = request.user)
-      context = {
-            'account': account
-      }
-      return render(request, "accounts/contractor_profile.html", context)

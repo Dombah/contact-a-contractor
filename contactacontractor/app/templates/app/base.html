@@ -18,8 +18,6 @@
                     {% else %}
                         <li><a href="{% url 'accounts:user_dashboard' %}">User Dashboard</a></li>
                         <li><a href="{% url 'accounts:user_profile' %}">User Profile</a></li>
-                        <li><a href="{% url 'accounts:contractor_dashboard' %}">Contractor Dashboard</a></li>
-                        <li><a href="{% url 'accounts:contractor_profile' %}">Contractor Profile</a></li>
                         <li><a href="{% url 'available_jobs' %}">Jobs</a></li>
                     {% endif %}
                 {% else %}
