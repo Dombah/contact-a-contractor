@@ -50,3 +50,5 @@ class Rating(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     review = models.TextField(max_length=100, default="")
     rating = models.IntegerField()
+    def __str__(self):
+        return f"{self.job.title} - Rating: {self.rating}"
