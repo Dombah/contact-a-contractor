@@ -10,7 +10,7 @@
     <form action="" method="post">
         {% csrf_token %}
         <p>Write your dispute message</p>
-        <textarea name="dispute" id="dispute" cols="30" rows="10"></textarea><br>
+        <textarea name="dispute" id="dispute" cols="30" rows="10" required></textarea><br>
         <input type="submit" value="Submit">
     </form>
 </body>
