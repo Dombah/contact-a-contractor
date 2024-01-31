@@ -25,3 +25,10 @@ def new_job(request):
             )
       context = {}
       return render(request, 'app/new_job.html', context)
+
+def available_jobs(request):
+      available_jobs = [job for job in Job.objects.all() if job.status == "available"]
+      context = {
+            'available_jobs': available_jobs,
+      }
+      return render(request, 'app/available_jobs.html', context)
