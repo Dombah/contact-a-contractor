@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from app.models import Account, Job, Dispute, Message
+from app.models import Account, Job, Dispute, Message, Quote
 from django.http import HttpResponseRedirect
 
 def home(request):
@@ -21,7 +21,7 @@ def new_job(request):
             job.save()
 
             return HttpResponseRedirect(
-                  redirect_to= '/accounts/user_dashboard/'
+                  redirect_to= '/accounts/dashboard/'
             )
       context = {}
       return render(request, 'app/new_job.html', context)
@@ -36,7 +36,7 @@ def submit_dispute(request, user, job_id):
             dispute = Dispute(user = user, job = job, reason = reason)
             dispute.save()
             return HttpResponseRedirect(
-                  redirect_to= '/accounts/user_dashboard/'
+                  redirect_to= '/accounts/dashboard/'
             )
     context = {}
     return render(request, 'app/submit_dispute.html', context)
@@ -64,3 +64,19 @@ def new_message(request):
             )
       context = {}
       return render(request, 'app/new_message.html', context)
+
+def new_quote(request, job_id):
+      if request.method == "POST":
+            contractor = request.user
+            price = request.POST.get("quote")
+            job = Job.objects.get(id = job_id)
+            accepted = False
+            
+            quote = Quote(contractor = contractor, job = job, price = price, accepted = accepted)
+            quote.save()
+
+            return HttpResponseRedirect(
+                  redirect_to= '/jobs/available/'
+            )
+      context = {}
+      return render(request, 'app/new_quote.html', context)
