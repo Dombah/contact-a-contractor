@@ -27,8 +27,10 @@ def new_job(request):
       return render(request, 'app/new_job.html', context)
 
 def available_jobs(request):
+      account = Account.objects.get(user=request.user)
       available_jobs = [job for job in Job.objects.all() if job.status == "available"]
       context = {
+            'account': account,
             'available_jobs': available_jobs,
       }
       return render(request, 'app/available_jobs.html', context)
