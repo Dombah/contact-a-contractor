@@ -40,6 +40,7 @@ def submit_dispute(request, user, job_id):
             )
     context = {}
     return render(request, 'app/submit_dispute.html', context)
+
 def available_jobs(request):
       account = Account.objects.get(user=request.user)
       available_jobs = [job for job in Job.objects.all() if job.status == "available"]

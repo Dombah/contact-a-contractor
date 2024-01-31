@@ -34,6 +34,8 @@ class Dispute(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     reason = models.TextField(max_length=100)
+    def __str__(self):
+        return f"Dispute for: {self.job}"
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
