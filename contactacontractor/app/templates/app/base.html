@@ -16,14 +16,14 @@
                     {% if request.user.is_superuser %}
                         <li><a href="/admin">Admin Dashboard</a></li>
                     {% else %}
-                        <li><a href="{% url 'user_dashboard' %}">User Dashboard</a></li>
-                        <li><a href="{% url 'user_profile' %}">User Profile</a></li>
-                        <li><a href="{% url 'contractor_dashboard' %}">Contractor Dashboard</a></li>
-                        <li><a href="{% url 'contractor_profile' %}">Contractor Profile</a></li>
+                        <li><a href="{% url 'accounts:user_dashboard' %}">User Dashboard</a></li>
+                        <li><a href="{% url 'accounts:user_profile' %}">User Profile</a></li>
+                        <li><a href="{% url 'accounts:contractor_dashboard' %}">Contractor Dashboard</a></li>
+                        <li><a href="{% url 'accounts:contractor_profile' %}">Contractor Profile</a></li>
                     {% endif %}
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'accounts:register' %}">Register</a></li>
                 {% endif %}
             </ul>
         </nav>
