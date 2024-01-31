@@ -22,9 +22,6 @@ from app.views import submit_dispute
 app_name = "accounts"
 urlpatterns = [
     path('register/', register, name='register'),
-    path('user_dashboard/', user_dashboard, name='user_dashboard'),
-    path('user_profile/', user_profile, name='user_profile'),
-    path('contractor_dashboard/', contractor_dashboard, name='contractor_dashboard'),
-    path('contractor_profile/', contractor_profile, name='contractor_profile'),
-    path('user_dashboard/submit_dispute/<str:user>/<int:job_id>/', submit_dispute, name='submit_dispute'),
-]
+    path('dashboard/', user_dashboard, name='user_dashboard'),
+    path('profile/', user_profile, name='user_profile'),
+    path('user_dashboard/submit_dispute/<str:user>/<int:job_id>/', submit_dispute, name='submit_dispute'),]

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from app.models import Account, Job, Dispute
-from django.http import HttpResponseRedirect, HttpResponse
+from app.models import Account, Job, Dispute, Message
+from django.http import HttpResponseRedirect
 
 def home(request):
     context = {}
@@ -40,3 +40,26 @@ def submit_dispute(request, user, job_id):
             )
     context = {}
     return render(request, 'app/submit_dispute.html', context)
+def available_jobs(request):
+      account = Account.objects.get(user=request.user)
+      available_jobs = [job for job in Job.objects.all() if job.status == "available"]
+      context = {
+            'account': account,
+            'available_jobs': available_jobs,
+      }
+      return render(request, 'app/available_jobs.html', context)
+
+def new_message(request):
+      if request.method == "POST":
+            sender = request.user
+            receiver = User.objects.get(username=request.POST.get("receiver"))
+            text = request.POST.get("message")
+
+            message = Message(sender = sender, receiver = receiver, text = text)
+            message.save()
+
+            return HttpResponseRedirect(
+                  redirect_to= '/'
+            )
+      context = {}
+      return render(request, 'app/new_message.html', context)

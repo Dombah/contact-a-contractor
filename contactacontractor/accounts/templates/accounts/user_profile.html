@@ -18,4 +18,29 @@
             <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
         </div>
     </div>
+    <br>
+    {% if account.contractor %}
+        <h1 style="text-transform: capitalize;">{{account.user.username}}'s Contractor Profile</h1>
+        <div>
+            <h2>Profile Information</h2>
+            <p>First Name: {{account.first_name}}</p>
+            <p>Last Name: {{account.last_name}}</p>
+            <p>Email: {{account.user.email}}</p>
+            <p>Rating: <!-- to be implemented --></p>
+        </div>
+        <div>
+            <div>
+                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Submitted Jobs</h2>
+            </div>
+            <div>
+                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>
+            </div>
+            <div>
+                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
+            </div>
+        </div>
+    {% else %}
+        <p><a href="#">Sign up</a> to be a contractor!</p>
+    {% endif %}
+
 {% endblock content %}

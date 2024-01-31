@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h1>Available Jobs</h1>
+    <div>
+        {% if not available_jobs %}
+            <h3>There are currently no available jobs.</h3>
+        {% else %}
+            {% for job in available_jobs %}
+                <div style="border: 1px solid black;">
+                    <h4>Title: {{ job.title }}</h4>
+                    <p>Description: {{ job.description }}</p>
+                    <p>Location: {{ job.location }}</p>
+                    <p>Job Type: {{ job.type }}</p>
+                    <p>Job Budget: {{ job.budget }} $</p>
+                    <p><a href="#">{{ job.user.username }}</a></p>
+                    {% if account.contractor %}
+                        <p><a href="#">Submit Quote</a></p>
+                    {% endif %}
+                    <p><a href="{% url 'new_message' %}">Message User</a></p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock content %}
