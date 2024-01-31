@@ -31,6 +31,16 @@
         <div>
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Submitted Jobs</h2>
+                {% for job in submitted_jobs %}
+                    <div style="border: 1px solid black">
+                        <h3>Title: {{ job.title }}</h3>
+                        <p>Description: {{ job.description }}</p>
+                        <p>Job issuer: {{ job.user.username }}</p>
+                        <p>Location: {{ job.location }}</p>
+                        <p>Job Type:{{ job.type }}</p>
+                        <p>Budget: {{ job.budget }}</p>
+                    </div>
+                {% endfor %}
             </div>
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>

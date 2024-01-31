@@ -40,7 +40,9 @@ def user_dashboard(request):
 
 def user_profile(request):
     account = Account.objects.get(user = request.user)
+    submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
     context = {
-          'account': account
+          'account': account,
+          'submitted_jobs': submitted_jobs,
     }
     return render(request, "accounts/user_profile.html", context)
