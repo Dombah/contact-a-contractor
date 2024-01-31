@@ -48,4 +48,5 @@ class Rating(models.Model):
     rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rater")
     ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ratee")
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    review = models.TextField(max_length=100, default="")
     rating = models.IntegerField()
