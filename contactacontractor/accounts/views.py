@@ -48,3 +48,14 @@ def user_profile(request):
           'assigned_jobs': assigned_jobs,
     }
     return render(request, "accounts/user_profile.html", context)
+
+def become_contractor(request):
+    if request.method == "POST":
+          account = Account.objects.get(user = request.user)
+          account.contractor = True
+          account.save()
+          return HttpResponseRedirect(
+                     redirect_to= '/accounts/dashboard/'
+            )
+    context = {}
+    return render(request, "accounts/become_contractor.html", context)
