@@ -26,9 +26,11 @@ def register(request):
 def user_dashboard(request):
     account = Account.objects.get(user = request.user)
     jobs = [job for job in Job.objects.all() if job.user.username == request.user.username]
+    messages = [message for message in Message.objects.all() if message.receiver.username == request.user.username]
     context = {
           'account': account,
-          'jobs': jobs
+          'jobs': jobs,
+          'messages': messages,
     }
     return render(request, "accounts/user_dashboard.html", context)
 

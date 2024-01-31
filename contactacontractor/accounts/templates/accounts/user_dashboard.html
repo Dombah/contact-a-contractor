@@ -23,6 +23,13 @@
     </div>
     <div>
         <h2>Your Messages</h2>
+        {% for message in messages %}
+            <div style="border: 1px solid black;">
+                <h3>{{ message.sender }}:</h3>
+                <p>{{ message.text }}</p>
+                <p><a href="{% url 'new_message' %}">Reply</a></p>
+            </div>
+        {% endfor %}
     </div>
     <br>
     {% if account.contractor %}
