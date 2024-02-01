@@ -108,7 +108,7 @@
         </div>
     {% else %}
         {% if is_Owner %}
-            <p><a href="#">Sign up</a> to be a contractor!</p>
+            <p><a href="{% url 'accounts:become_contractor' %}">Sign up</a> to be a contractor!</p>
         {% endif %}
     {% endif %}
 
