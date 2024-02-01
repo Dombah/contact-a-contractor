@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Quotes</title>
+</head>
+<body>
+    <h1>Quotes for Your Job</h1>
+    <div id="quotes">
+        {% for quote in quotes %}
+            <div class="quote" style = "border: 1px solid">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <p><strong>Contractor:</strong> {{ quote.contractor.username }}</p>
+                    <p><strong>Quote Amount:</strong> {{ quote.price }} €</p>
+                    <input type="submit" name="accept" value="Accept">
+                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
