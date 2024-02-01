@@ -57,6 +57,28 @@ def submit_review(request, job_id):
     context = {}
     return render(request, 'app/submit_review.html', context)
 
+def view_quotes(request, job_id):
+      if request.method == "POST":
+            quote_id = request.POST.get('quote_id')
+            accepted_quote = Quote.objects.get(id = quote_id)
+            accepted_quote.accepted = True
+            accepted_quote.save()
+            job = Job.objects.get(id = job_id)
+            job.status = Job.JOB_STATUS_ACCEPTED
+            job.save()
+            account = Account.objects.get(user = request.user)
+            account.balance -= accepted_quote.price
+            account.save()
+            Quote.objects.filter(job=job_id).exclude(id=quote_id).delete()
+            return HttpResponseRedirect(
+                  redirect_to= '/accounts/dashboard/'
+            )
+      context = {
+            'quotes': Quote.objects.filter(job = job_id),
+      }
+      return render(request, 'app/view_quotes.html', context)
+
+
 def available_jobs(request):
       account = Account.objects.get(user=request.user)
       available_jobs = [job for job in Job.objects.all() if job.status == "available"]
@@ -92,7 +114,7 @@ def new_quote(request, job_id):
             
             quote = Quote(contractor = contractor, job = job, price = price, accepted = accepted)
             quote.save()
-
+      
             return HttpResponseRedirect(
                   redirect_to= '/jobs/available/'
             )

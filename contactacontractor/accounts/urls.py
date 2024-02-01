@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.urls import path
 from accounts.views import register, user_dashboard, user_profile, become_contractor, new_reply, confirm_quote
-from app.views import submit_dispute, submit_review
+from app.views import submit_dispute, submit_review, view_quotes
 
 app_name = "accounts"
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('profile/<str:username>', user_profile, name='user_profile'),
     path('dashboard/submit-dispute/<int:job_id>/', submit_dispute, name='submit_dispute'),
     path('dashboard/submit-review/<int:job_id>/', submit_review, name='submit_review'),
+    path('dashboard/view-quotes/<int:job_id>/', view_quotes, name='view_quotes'),
     path('become-contractor/', become_contractor, name='become_contractor'),
     path('dashboard/new-reply/<int:message_id>/', new_reply, name='new_reply'),
     path('dashboard/confirm-quote/<int:quote_id>/', confirm_quote, name='confirm_quote'),

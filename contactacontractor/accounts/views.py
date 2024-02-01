@@ -39,6 +39,9 @@ def user_dashboard(request):
           'your_job_quotes': your_job_quotes,
           'assigned_jobs': assigned_jobs,
           'completed_jobs': completed_jobs,
+          'JOB_STATUS_AVAILABLE': Job.JOB_STATUS_AVAILABLE,
+          'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
+          'JOB_STATUS_PENDING': Job.JOB_STATUS_PENDING,
     }
     return render(request, "accounts/user_dashboard.html", context)
 
