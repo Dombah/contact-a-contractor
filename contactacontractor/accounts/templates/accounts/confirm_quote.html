@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    <h1>Quote Confirmation</h1>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="">Accept Quote: </label>
+            <input type="checkbox" name="accept_quote" id=""> Yes <br>
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+{% endblock content %}
