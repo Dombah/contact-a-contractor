@@ -7,7 +7,7 @@
         <h2>Account Information</h2>
         <p>Username: {{ account.user.username }}</p>
         <p>Email: {{ account.user.email }}</p>
-        <p>Balance: {{ account.balance }} $</p>
+        <p>Balance: {{ account.balance }} €</p>
     </div>
     <div>
         <h2>Your Jobs</h2>
@@ -24,11 +24,17 @@
                         <input type="button" value="Submit a review">
                     </a>
                 {% else %}
-                    <p>Status: Not Completed</p>
                     {% if job.status == JOB_STATUS_AVAILABLE %}
+                        <p>Status: Available</p>
                         <a href = "/accounts/dashboard/view-quotes/{{ job.id }}">
                             <input type="button" value="View submited quotes">
                         </a>
+                    {% endif %}
+                    {% if job.status == JOB_STATUS_ACCEPTED %}
+                        <p>Status: Accepted</p>
+                    {% endif %}
+                    {% if job.status == JOB_STATUS_PENDING %}
+                        <p>Status: Pending</p>
                     {% endif %}
                 {% endif %}
             </div>
@@ -40,7 +46,7 @@
             <div style="border: 1px solid black;">
                 <h3>Title: {{ quote.job.title }}</h3>
                 <p>Description: {{ quote.job.description }}</p>
-                <p>Quote: {{ quote.price }} $</p>
+                <p>Quote: {{ quote.price }} €</p>
                 <p>Contractor: {{quote.contractor}}</p>
                 {% if quote.accepted == False %}
                     <a href="{% url 'accounts:confirm_quote' quote.id %}"><button>Accept</button></a>
@@ -65,7 +71,7 @@
             <h2>Account Information</h2>
             <p>Username: {{ account.user.username }}</p>
             <p>Email: {{ account.user.email }}</p>
-            <p>Balance: {{ account.balance }} $</p>
+            <p>Balance: {{ account.balance }} €</p>
         </div>
         <div>
             <h2>Your Submitted Quotes</h2>
@@ -73,7 +79,7 @@
                 <div style="border: 1px solid black;">
                     <h3>Title: {{ quote.job.title }}</h3>
                     <p>Description: {{ quote.job.description }}</p>
-                    <p>Quote: {{ quote.price }} $</p>
+                    <p>Quote: {{ quote.price }} €</p>
                     {% if quote.accepted %}
                         <p>Status: Accepted</p>
                     {% else %}
@@ -91,7 +97,7 @@
                         <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
                         <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
                         <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                        <p>Budget: {{ job.budget }} $</p>
+                        <p>Budget: {{ job.budget }} €</p>
                     </div>
                 {% endfor %}
         </div>
@@ -104,7 +110,7 @@
                         <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
                         <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
                         <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                        <p>Budget: {{ job.budget }} $</p>
+                        <p>Budget: {{ job.budget }} €</p>
                     </div>
                 {% endfor %}
         </div>

@@ -12,7 +12,7 @@
                     <p>Description: {{ job.description }}</p>
                     <p>Location: {{ job.location }}</p>
                     <p>Job Type: {{ job.type }}</p>
-                    <p>Job Budget: {{ job.budget }} $</p>
+                    <p>Job Budget: {{ job.budget }} €</p>
                     <p><a href="../../accounts/profile/{{job.user.username}}">{{ job.user.username }}</a></p>
                     {% if account.contractor %}
                         <a href="{% url 'new_quote' job.id %}"><button>Submit Quote</button></a>
