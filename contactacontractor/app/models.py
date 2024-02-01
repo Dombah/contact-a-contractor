@@ -26,6 +26,8 @@ class Job(models.Model):
     budget = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(max_length=100, default=JOB_STATUS_AVAILABLE)
     is_completed = models.BooleanField()
+    is_dispute_written = models.BooleanField(default=False)
+    is_review_written = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.account.first_name} {self.user.account.last_name} - {self.title}"
 
