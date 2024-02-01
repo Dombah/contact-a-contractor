@@ -29,12 +29,16 @@ def user_dashboard(request):
     messages = [message for message in Message.objects.all() if message.receiver.username == request.user.username]
     your_quotes = [quote for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
     your_job_quotes = [quote for quote in Quote.objects.all() if quote.job.user.username == request.user.username]
+    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
+    completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
     context = {
           'account': account,
           'jobs': jobs,
           'messages': messages,
           'your_quotes': your_quotes,
           'your_job_quotes': your_job_quotes,
+          'assigned_jobs': assigned_jobs,
+          'completed_jobs': completed_jobs,
     }
     return render(request, "accounts/user_dashboard.html", context)
 
