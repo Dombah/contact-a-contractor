@@ -17,12 +17,12 @@
                 <p>Description: {{ job.description }}</p>
                 {% if job.is_completed %}
                     <p>Completed</p>
-                    {% if not job.is_dispute_written and not job.is_review_written %}
-                        <a href="{% url 'accounts:submit_dispute' job.id %}">
-                            <input type="button" value="Submit a dispute">
-                        </a>
+                    {% if not job.is_review_written %}
                         <a href="{% url 'accounts:submit_review' job.id %}">
                             <input type="button" value="Submit a review">
+                        </a>
+                        <a href="{% url 'accounts:submit_dispute' job.id %}">
+                            <input type="button" value="Submit a dispute">
                         </a>
                     {% endif %}
                 {% else %}
