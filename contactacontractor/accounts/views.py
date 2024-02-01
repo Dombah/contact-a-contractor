@@ -37,6 +37,14 @@ def user_dashboard(request):
 def user_profile(request):
     account = Account.objects.get(user = request.user)
     context = {
-          'account': account
+          'account': account,
+          'rating' : calculate_rating(request),
     }
     return render(request, "accounts/user_profile.html", context)
+
+def calculate_rating(request):
+    rating = Rating.objects.filter(ratee = request.user)
+    total = 0
+    for rate in rating:
+        total += rate.rating
+    return total / len(rating)
