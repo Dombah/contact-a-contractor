@@ -17,8 +17,12 @@
                 <p>{{ job.description }}</p>
                 {% if job.is_completed %}
                     <p>Completed</p>
-                    <input type="button" value="Submit a dispute" onclick="window.location.href='/accounts/dashboard/submit-dispute/{{ job.id }}'">
-                    <input type="button" value="Submit a review" onclick="window.location.href='/accounts/dashboard/submit-review/{{ job.id }}'">
+                    <a href = "/accounts/dashboard/submit-dispute/{{ job.id }}">
+                        <input type="button" value="Submit a dispute">
+                    </a>
+                    <a href = "/accounts/dashboard/submit-review/{{ job.id }}">
+                        <input type="button" value="Submit a review">
+                    </a>
                 {% else %}
                     <p>Not Completed</p>
                 {% endif %}
