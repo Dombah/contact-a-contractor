@@ -42,7 +42,6 @@
             <div style="border: 1px solid black;">
                 <h3>Sender: {{ message.sender }}:</h3>
                 <p>Message: {{ message.text }}</p>
-                <p><a href="{% url 'new_message' %}">Reply</a></p>
             </div>
         {% endfor %}
     </div>

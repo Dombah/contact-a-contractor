@@ -7,7 +7,7 @@
         <form action="" method="post">
             {% csrf_token %}
             <label for="">To:</label>
-            <input type="text" name="receiver" id="" required>
+            <input type="text" name="" id="" value="{{subject}}" readonly>
             <label for="">Message:</label>
             <input type="text" name="message" id="" required>
             <input type="submit" value="Send Message">

@@ -66,10 +66,10 @@ def available_jobs(request):
       }
       return render(request, 'app/available_jobs.html', context)
 
-def new_message(request):
+def new_message(request, job_id):
       if request.method == "POST":
             sender = request.user
-            receiver = User.objects.get(username=request.POST.get("receiver"))
+            receiver = Job.objects.get(id = job_id).user
             text = request.POST.get("message")
 
             message = Message(sender = sender, receiver = receiver, text = text)
@@ -78,7 +78,9 @@ def new_message(request):
             return HttpResponseRedirect(
                   redirect_to= '/'
             )
-      context = {}
+      context = {
+            'subject': Job.objects.get(id = job_id).user.username,
+      }
       return render(request, 'app/new_message.html', context)
 
 def new_quote(request, job_id):
