@@ -59,3 +59,20 @@ def become_contractor(request):
             )
     context = {}
     return render(request, "accounts/become_contractor.html", context)
+
+def new_reply(request, message_id):
+      if request.method == "POST":
+            sender = request.user
+            receiver = Message.objects.get(id = message_id).sender
+            text = request.POST.get("message")
+
+            message = Message(sender = sender, receiver = receiver, text = text)
+            message.save()
+
+            return HttpResponseRedirect(
+                  redirect_to= '/'
+            )
+      context = {
+            'subject': Message.objects.get(id = message_id).sender.username,
+      }
+      return render(request, 'accounts/new_reply.html', context)
