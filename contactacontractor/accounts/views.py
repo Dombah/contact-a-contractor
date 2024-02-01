@@ -170,3 +170,13 @@ def job_status(request, job_id):
         'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
     }
     return render(request, "accounts/job_status.html", context)
+
+def contract_status(request, job_id):
+    job = Job.objects.get(id = job_id)
+    context = {
+        'job': job,
+        'JOB_STATUS_AVAILABLE': Job.JOB_STATUS_AVAILABLE,
+        'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
+        'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
+    }
+    return render(request, "accounts/job_status.html", context)
