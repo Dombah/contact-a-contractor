@@ -25,6 +25,11 @@
                     </a>
                 {% else %}
                     <p>Status: Not Completed</p>
+                    {% if job.status == JOB_STATUS_AVAILABLE %}
+                        <a href = "/accounts/dashboard/view-quotes/{{ job.id }}">
+                            <input type="button" value="View submited quotes">
+                        </a>
+                    {% endif %}
                 {% endif %}
             </div>
         {% endfor %}

@@ -12,13 +12,18 @@ class Account(models.Model):
         return f"{self.id} - {self.first_name} {self.last_name}"
     
 class Job(models.Model):
+
+    JOB_STATUS_AVAILABLE = "available"
+    JOB_STATUS_ACCEPTED = "accepted"
+    JOB_STATUS_PENDING = "pending"
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=100)
     location = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     budget = models.DecimalField(max_digits=8, decimal_places=2)
-    status = models.CharField(max_length=100, default="available")
+    status = models.CharField(max_length=100, default=JOB_STATUS_AVAILABLE)
     is_completed = models.BooleanField()
     def __str__(self):
         return f"{self.user.account.first_name} {self.user.account.last_name} - {self.title}"
