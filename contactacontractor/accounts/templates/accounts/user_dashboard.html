@@ -41,20 +41,6 @@
         {% endfor %}
     </div>
     <div>
-        <h2>Your Job Quotes</h2>
-        {% for quote in your_job_quotes %}
-            <div style="border: 1px solid black;">
-                <h3>Title: {{ quote.job.title }}</h3>
-                <p>Description: {{ quote.job.description }}</p>
-                <p>Quote: {{ quote.price }} €</p>
-                <p>Contractor: {{quote.contractor}}</p>
-                {% if quote.accepted == False %}
-                    <a href="{% url 'accounts:confirm_quote' quote.id %}"><button>Accept</button></a>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
-    <div>
         <h2>Your Messages</h2>
         {% for message in messages %}
             <div style="border: 1px solid black;">
