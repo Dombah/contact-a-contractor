@@ -10,8 +10,8 @@
             <p>Status: Available</p>
         {% elif job.status == JOB_STATUS_IN_PROGRESS%}
             <p>Status: In progress</p>
-        {% elif job.status == JOB_STATUS_COMPLETE%}
-            <p>Status: Complete</p>
+        {% else %}
+            <p>Status: Completed</p>
         {% endif %}
     </div>
 
