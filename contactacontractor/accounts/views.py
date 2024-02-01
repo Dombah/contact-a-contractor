@@ -90,4 +90,6 @@ def calculate_rating(request):
     total = 0
     for rate in rating:
         total += rate.rating
+    if len(rating) == 0:
+        return 0
     return total / len(rating)
