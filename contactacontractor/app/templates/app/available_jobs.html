@@ -15,9 +15,9 @@
                     <p>Job Budget: {{ job.budget }} $</p>
                     <p><a href="#">{{ job.user.username }}</a></p>
                     {% if account.contractor %}
-                        <p><a href="{% url 'new_quote' job.id %}">Submit Quote</a></p>
+                        <a href="{% url 'new_quote' job.id %}"><button>Submit Quote</button></a>
                     {% endif %}
-                    <p><a href="{% url 'new_message' %}">Message User</a></p>
+                    <a href="{% url 'new_message' job.id %}"><button>Message User</button></a>
                 </div>
             {% endfor %}
         {% endif %}

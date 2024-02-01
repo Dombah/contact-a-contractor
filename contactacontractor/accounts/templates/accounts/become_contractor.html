@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    <h1>Become a contractor!</h1>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="">Become a contractor: </label>
+            <input type="checkbox" name="contractor" id=""> Yes <br>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+
+{% endblock content %}
