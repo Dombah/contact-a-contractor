@@ -29,8 +29,11 @@ def user_dashboard(request):
     messages = [message for message in Message.objects.all() if message.receiver.username == request.user.username]
     your_quotes = [quote for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
     your_job_quotes = [quote for quote in Quote.objects.all() if quote.job.user.username == request.user.username]
-    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
-    completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
+    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
+    completed_jobs = Job.objects.filter(user=request.user, is_completed=True)
+    completed_Contractor_Jobs = None
+    if(account.contractor == True):
+         completed_Contractor_Jobs = Job.objects.filter(quote__contractor=request.user, is_completed=True)
     context = {
           'account': account,
           'jobs': jobs,
@@ -39,6 +42,7 @@ def user_dashboard(request):
           'your_job_quotes': your_job_quotes,
           'assigned_jobs': assigned_jobs,
           'completed_jobs': completed_jobs,
+          'completed_Contractor_Jobs': completed_Contractor_Jobs,
           'JOB_STATUS_AVAILABLE': Job.JOB_STATUS_AVAILABLE,
           'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
           'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
