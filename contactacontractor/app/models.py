@@ -15,7 +15,8 @@ class Job(models.Model):
 
     JOB_STATUS_AVAILABLE = "available"
     JOB_STATUS_ACCEPTED = "accepted"
-    JOB_STATUS_PENDING = "pending"
+    JOB_STATUS_IN_PROGRESS = "in progress"
+    JOB_STATUS_COMPLETE = "complete"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
