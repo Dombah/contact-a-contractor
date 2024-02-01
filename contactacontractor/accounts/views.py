@@ -42,24 +42,37 @@ def user_dashboard(request):
     }
     return render(request, "accounts/user_dashboard.html", context)
 
-def user_profile(request):
-    account = Account.objects.get(user = request.user)
-    submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
-    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
-    done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == request.user.username]
-    accepted_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.status == "accepted"]
-    completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
-    context = {
-          'account': account,
-          'submitted_jobs': submitted_jobs,
-          'assigned_jobs': assigned_jobs,
-          'done_jobs': done_jobs,
-          'accepted_jobs': accepted_jobs,
-          'completed_jobs': completed_jobs,
-          'rating' : calculate_rating(request),
-          'reviews' : Rating.objects.filter(ratee = request.user),
-    }
-    return render(request, "accounts/user_profile.html", context)
+def user_profile(request, username):
+    account = Account.objects.get(user__username=username)
+    is_Owner = account.user == request.user
+    if(is_Owner):
+        submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
+        assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
+        done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == request.user.username]
+        accepted_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.status == "accepted"]
+        completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
+        context = {
+            'account': account,
+            'submitted_jobs': submitted_jobs,
+            'assigned_jobs': assigned_jobs,
+            'done_jobs': done_jobs,
+            'accepted_jobs': accepted_jobs,
+            'completed_jobs': completed_jobs,
+            'rating' : calculate_rating(request),
+            'reviews' : Rating.objects.filter(ratee = request.user),
+            'is_Owner': is_Owner,
+        }
+        return render(request, "accounts/user_profile.html", context)
+    else:
+        done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == account.user.username]
+        context = {
+            'account': account,
+            'done_jobs': done_jobs,
+            'rating' : calculate_rating(request),
+            'reviews' : Rating.objects.filter(ratee = account.user),
+            'is_Owner': is_Owner,
+        }
+        return render(request, "accounts/user_profile.html", context)
 
 def become_contractor(request):
     if request.method == "POST":

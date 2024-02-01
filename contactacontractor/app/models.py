@@ -8,7 +8,6 @@ class Account(models.Model):
     last_name = models.CharField(max_length=100)
     balance = models.DecimalField(max_digits=8, decimal_places=2)
     contractor = models.BooleanField()
-
     def __str__(self):
         return f"{self.id} - {self.first_name} {self.last_name}"
     
