@@ -13,29 +13,37 @@
         {% if is_Owner %}
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Accepted Jobs</h2>
-                {% for job in accepted_jobs %}
-                    <div style="border: 1px solid black">
-                        <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                        <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                        <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                        <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                        <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                        <p>Budget: {{ job.budget }} $</p>
-                    </div>
-                {% endfor %}
+                {% if accepted_jobs %}
+                    {% for job in accepted_jobs %}
+                        <div style="border: 1px solid black">
+                            <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
+                            <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
+                            <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
+                            <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
+                            <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
+                            <p>Budget: {{ job.budget }} $</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No accepted jobs yet!</p>
+                {% endif %}
             </div>
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
-                {% for job in completed_jobs %}
-                    <div style="border: 1px solid black">
-                        <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                        <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                        <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                        <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                        <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                        <p>Budget: {{ job.budget }} $</p>
-                    </div>
-                {% endfor %}
+                {% if completed_jobs %}
+                    {% for job in completed_jobs %}
+                        <div style="border: 1px solid black">
+                            <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
+                            <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
+                            <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
+                            <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
+                            <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
+                            <p>Budget: {{ job.budget }} $</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No completed jobs yet!</p>
+                {% endif %}
             </div>
         {% endif %}
     </div>
@@ -67,7 +75,43 @@
             {% if is_Owner %}
                 <div>
                     <h2 style="text-transform: capitalize;">{{account.user.username}}'s Submitted Jobs</h2>
-                    {% for job in submitted_jobs %}
+                    {% if submitted_jobs %}
+                        {% for job in submitted_jobs %}
+                            <div style="border: 1px solid black">
+                                <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
+                                <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
+                                <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
+                                <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
+                                <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
+                                <p>Budget: {{ job.budget }} $</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No submitted jobs yet!</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>
+                    {% if assigned_jobs %}
+                        {% for job in assigned_jobs %}
+                            <div style="border: 1px solid black">
+                                <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
+                                <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
+                                <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
+                                <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
+                                <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
+                                <p>Budget: {{ job.budget }} $</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No assigned jobs yet!</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div>
+                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
+                {% if done_jobs %}
+                    {% for job in done_jobs %}
                         <div style="border: 1px solid black">
                             <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
                             <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
@@ -77,33 +121,9 @@
                             <p>Budget: {{ job.budget }} $</p>
                         </div>
                     {% endfor %}
-                </div>
-                <div>
-                    <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>
-                    {% for job in assigned_jobs %}
-                        <div style="border: 1px solid black">
-                            <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                            <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                            <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                            <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                            <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                            <p>Budget: {{ job.budget }} $</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <div>
-                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
-                {% for job in done_jobs %}
-                    <div style="border: 1px solid black">
-                        <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                        <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                        <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                        <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                        <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                        <p>Budget: {{ job.budget }} $</p>
-                    </div>
-                {% endfor %}
+                {% else %}
+                    <p>No completed jobs yet!</p>
+                {% endif %}
             </div>
         </div>
     {% else %}
@@ -111,5 +131,4 @@
             <p><a href="{% url 'accounts:become_contractor' %}">Sign up</a> to be a contractor!</p>
         {% endif %}
     {% endif %}
-
 {% endblock content %}
