@@ -59,14 +59,21 @@ def submit_review(request, job_id):
 
 def view_quotes(request, job_id):
       if request.method == "POST":
+            account = Account.objects.get(user = request.user)
             quote_id = request.POST.get('quote_id')
             accepted_quote = Quote.objects.get(id = quote_id)
+            if account.balance < accepted_quote.price:
+                  context = {
+                        'quotes': Quote.objects.filter(job = job_id),
+                        'error': "You do not have enough funds to accept this quote."
+                  }
+                  return render(request, 'app/view_quotes.html', context)
+            
             accepted_quote.accepted = True
             accepted_quote.save()
             job = Job.objects.get(id = job_id)
             job.status = Job.JOB_STATUS_ACCEPTED
             job.save()
-            account = Account.objects.get(user = request.user)
             account.balance -= accepted_quote.price
             account.save()
             Quote.objects.filter(job=job_id).exclude(id=quote_id).delete()
@@ -75,6 +82,7 @@ def view_quotes(request, job_id):
             )
       context = {
             'quotes': Quote.objects.filter(job = job_id),
+            'error': ''
       }
       return render(request, 'app/view_quotes.html', context)
 
