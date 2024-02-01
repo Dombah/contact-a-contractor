@@ -39,6 +39,7 @@ def user_profile(request):
     context = {
           'account': account,
           'rating' : calculate_rating(request),
+          'reviews' : Rating.objects.filter(ratee = request.user),
     }
     return render(request, "accounts/user_profile.html", context)
 
