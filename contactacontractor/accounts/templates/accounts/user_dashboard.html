@@ -37,6 +37,9 @@
                 <p>Description: {{ quote.job.description }}</p>
                 <p>Quote: {{ quote.price }} $</p>
                 <p>Contractor: {{quote.contractor}}</p>
+                {% if quote.accepted == False %}
+                    <a href="{% url 'accounts:confirm_quote' quote.id %}"><button>Accept</button></a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
