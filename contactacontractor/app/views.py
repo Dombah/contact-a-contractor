@@ -35,6 +35,8 @@ def submit_dispute(request, job_id):
 
             dispute = Dispute(user = user, job = job, reason = reason)
             dispute.save()
+            job.is_dispute_written = True
+            job.save()
             return HttpResponseRedirect(
                   redirect_to= '/accounts/dashboard/'
             )
@@ -51,6 +53,8 @@ def submit_review(request, job_id):
 
             rating = Rating(rater = rater, ratee = ratee, job = job, review = review, rating = rating)
             rating.save()
+            job.is_review_written = True
+            job.save()
             return HttpResponseRedirect(
                   redirect_to= '/accounts/dashboard/'
             )
