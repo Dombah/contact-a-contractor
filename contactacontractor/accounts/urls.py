@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from accounts.views import register, user_dashboard, user_profile, become_contractor
+from accounts.views import register, user_dashboard, user_profile, become_contractor, new_reply
 from app.views import submit_dispute, submit_review
 
 app_name = "accounts"
@@ -26,6 +26,7 @@ urlpatterns = [
     path('profile/', user_profile, name='user_profile'),
     path('dashboard/submit-dispute/<int:job_id>/', submit_dispute, name='submit_dispute'),
     path('dashboard/submit-review/<int:job_id>/', submit_review, name='submit_review'),
-    path('become-contractor/', become_contractor, name='become_contractor')
+    path('become-contractor/', become_contractor, name='become_contractor'),
+    path('dashboard/new-reply/<int:message_id>/', new_reply, name='new_reply')
 ]
 
