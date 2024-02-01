@@ -50,13 +50,18 @@
         <div>
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Reviews</h2>
-                {% for review in reviews %}
-                    <div style="border: 1px solid black;">
-                        <p>By: {{review.job.user}}</p>
-                        <p>{{review.rating}} &#9733;</p></p>
-                        <p>{{review.review}}</p>
-                    </div>
-                {% endfor %}
+                
+                {% if reviews %}
+                    {% for review in reviews %}
+                        <div style="border: 1px solid black;">
+                            <p>By: {{review.job.user}}</p>
+                            <p>{{review.rating}} &#9733;</p></p>
+                            <p>{{review.review}}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No reviews yet!</p>
+                {% endif %}
             </div>
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Submitted Jobs</h2>
