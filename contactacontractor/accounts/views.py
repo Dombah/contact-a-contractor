@@ -97,3 +97,16 @@ def calculate_rating(request):
     if len(rating) == 0:
         return 0
     return total / len(rating)
+
+def confirm_quote(request, quote_id):
+      if request.method == "POST":
+           quote = Quote.objects.get(id = quote_id)
+           quote.accepted = True
+           quote.job.status = "assigned"
+           quote.job.save()
+           quote.save()
+           return HttpResponseRedirect(
+                 redirect_to= '/accounts/dashboard/'
+           )
+      context = {}
+      return render(request, 'accounts/confirm_quote.html', context)
