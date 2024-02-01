@@ -42,12 +42,14 @@ def user_profile(request):
     account = Account.objects.get(user = request.user)
     submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
     assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
+    done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == request.user.username]
     accepted_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.status == "accepted"]
     completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
     context = {
           'account': account,
           'submitted_jobs': submitted_jobs,
           'assigned_jobs': assigned_jobs,
+          'done_jobs': done_jobs,
           'accepted_jobs': accepted_jobs,
           'completed_jobs': completed_jobs,
     }
