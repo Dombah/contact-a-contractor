@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    <h1>Send Message</h1>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="">To:</label>
+            <input type="text" name="" id="" value="{{subject}}" readonly>
+            <label for="">Message:</label>
+            <input type="text" name="message" id="" required>
+            <input type="submit" value="Send Message">
+        </form>
+    </div>
+
+{% endblock content %}
