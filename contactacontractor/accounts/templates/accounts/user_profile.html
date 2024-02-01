@@ -94,14 +94,28 @@
                     <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>
                     {% if assigned_jobs %}
                         {% for job in assigned_jobs %}
-                            <div style="border: 1px solid black">
-                                <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                                <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                                <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                                <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                                <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                                <p>Budget: {{ job.budget }} €</p>
-                        </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div style="border: 1px solid black">
+                                    <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
+                                    <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
+                                    <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
+                                    <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
+                                    <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
+                                    <p>Budget: {{ job.budget }} €</p>
+                                    <p style="text-transform: capitalize;">Job Status: {{ job.status }}</p>
+                                    {% if job.status == JOB_STATUS_ACCEPTED %}
+                                        <input type="submit" name="startJob" value="Start job">
+                                        <input type="hidden" name="form_type" value="start_Job">
+                                        <input type="hidden" name="job_id" value="{{job.id}}">
+                                    {% endif %}
+                                    {% if job.status == JOB_STATUS_IN_PROGRESS %}
+                                        <input type="submit" name="completeJob" value="Complete job">
+                                        <input type="hidden" name="form_type" value="complete_Job">
+                                        <input type="hidden" name="job_id" value="{{job.id}}">
+                                    {% endif %}
+                                </div>
+                            </form>
                         {% endfor %}
                     {% else %}
                         <p>No assigned jobs yet!</p>

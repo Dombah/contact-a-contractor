@@ -41,13 +41,23 @@ def user_dashboard(request):
           'completed_jobs': completed_jobs,
           'JOB_STATUS_AVAILABLE': Job.JOB_STATUS_AVAILABLE,
           'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
-          'JOB_STATUS_PENDING': Job.JOB_STATUS_PENDING,
+          'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
     }
     return render(request, "accounts/user_dashboard.html", context)
 
 def user_profile(request, username):
     account = Account.objects.get(user__username=username)
     is_Owner = account.user == request.user
+
+    if(request.method == "POST"):
+        form_type = request.POST.get("form_type", None)
+        if(form_type == "start_Job"):
+            setJobInProgress(request.POST.get("job_id"))
+        elif(form_type == "complete_Job"):
+            job_id = request.POST.get("job_id")
+            setJobComplete(job_id)
+            updateContractorBalance(Quote.objects.get(job_id = job_id).id)
+            
     if(is_Owner):
         submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
         assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
@@ -64,6 +74,8 @@ def user_profile(request, username):
             'rating' : calculate_rating(request),
             'reviews' : Rating.objects.filter(ratee = request.user),
             'is_Owner': is_Owner,
+            'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
+            'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
         }
         return render(request, "accounts/user_profile.html", context)
     else:
@@ -126,3 +138,21 @@ def confirm_quote(request, quote_id):
            )
       context = {}
       return render(request, 'accounts/confirm_quote.html', context)
+
+def setJobInProgress(job_id):
+    job = Job.objects.get(id = job_id)
+    job.status = Job.JOB_STATUS_IN_PROGRESS
+    job.save()
+
+def setJobComplete(job_id):
+    job = Job.objects.get(id = job_id)
+    job.status = Job.JOB_STATUS_COMPLETE
+    job.is_completed = True
+    job.save()
+
+def updateContractorBalance(quote_id):
+    quote = Quote.objects.get(id = quote_id)
+    contractor_Account = Account.objects.get(user = quote.contractor)
+    contractor_Account.balance += quote.price
+    contractor_Account.save()
+    

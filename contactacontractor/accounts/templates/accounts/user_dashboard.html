@@ -29,11 +29,9 @@
                         <a href = "/accounts/dashboard/view-quotes/{{ job.id }}">
                             <input type="button" value="View submited quotes">
                         </a>
-                    {% endif %}
-                    {% if job.status == JOB_STATUS_ACCEPTED %}
+                    {% elif job.status == JOB_STATUS_ACCEPTED %}
                         <p>Status: Accepted</p>
-                    {% endif %}
-                    {% if job.status == JOB_STATUS_PENDING %}
+                    {% elif job.status == JOB_STATUS_IN_PROGRESS %}
                         <p>Status: Pending</p>
                     {% endif %}
                 {% endif %}
