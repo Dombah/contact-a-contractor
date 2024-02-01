@@ -16,7 +16,6 @@
                 <h3>Title: {{ job.title }}</h3>
                 <p>Description: {{ job.description }}</p>
                 {% if job.is_completed %}
-                    <p>Completed</p>
                     {% if not job.is_review_written %}
                         <a href="{% url 'accounts:submit_review' job.id %}">
                             <input type="button" value="Submit Review">
@@ -65,6 +64,7 @@
                     <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
                     <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
                     <p>Budget: {{ job.budget }} €</p>
+                    <a href="{% url 'accounts:contract_status' job.id %}"><button>View Status</button></a>
                 </div>
             {% endfor %}
         </div>
