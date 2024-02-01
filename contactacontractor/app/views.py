@@ -47,7 +47,7 @@ def submit_review(request, job_id):
     if request.method == "POST":
             rater = request.user
             job = Job.objects.get(id = job_id)
-            ratee = job.user
+            ratee = Quote.objects.get(job = job).contractor
             review = request.POST.get("message")
             rating = request.POST.get("rating")
 

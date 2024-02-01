@@ -31,9 +31,7 @@ def user_dashboard(request):
     your_job_quotes = [quote for quote in Quote.objects.all() if quote.job.user.username == request.user.username]
     assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
     completed_jobs = Job.objects.filter(user=request.user, is_completed=True)
-    completed_Contractor_Jobs = None
-    if(account.contractor == True):
-         completed_Contractor_Jobs = Job.objects.filter(quote__contractor=request.user, is_completed=True)
+    completed_Contractor_Jobs = completed_Contractor_Jobs = Job.objects.filter(quote__contractor=request.user, is_completed=True)     
     context = {
           'account': account,
           'jobs': jobs,
@@ -68,6 +66,8 @@ def user_profile(request, username):
         done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == request.user.username]
         accepted_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.status == "accepted"]
         completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
+        assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
+        completed_Contractor_Jobs = completed_Contractor_Jobs = Job.objects.filter(quote__contractor=request.user, is_completed=True) 
         context = {
             'account': account,
             'submitted_jobs': submitted_jobs,
@@ -75,6 +75,7 @@ def user_profile(request, username):
             'done_jobs': done_jobs,
             'accepted_jobs': accepted_jobs,
             'completed_jobs': completed_jobs,
+            'completed_Contractor_Jobs': completed_Contractor_Jobs,
             'rating' : calculate_rating(request),
             'reviews' : Rating.objects.filter(ratee = request.user),
             'is_Owner': is_Owner,

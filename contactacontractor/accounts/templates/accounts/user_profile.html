@@ -124,8 +124,8 @@
             {% endif %}
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
-                {% if done_jobs %}
-                    {% for job in done_jobs %}
+                {% if completed_Contractor_Jobs %}
+                    {% for job in completed_Contractor_Jobs %}
                         <div style="border: 1px solid black">
                             <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
                             <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
