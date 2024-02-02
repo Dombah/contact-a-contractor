@@ -1,0 +1,29 @@
+#main{
+    width: 40%;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 40px;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
+main h1{
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: 100%;
+    padding-top: 230px;
+}
+
+#quote{
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+    border-color: white;
+    font-weight: 800;
+}

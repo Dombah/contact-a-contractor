@@ -1,15 +1,16 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-
-    <h1>Submit a quote</h1>
-    <div>
-        
+<link rel="stylesheet" type="text/css" href="{% static 'new_quote.css' %}">
+<h1>Submit a quote</h1>
+    <div id="main">
+     
         <form action="" method="post">
             {%csrf_token%}
             <label for="">Your Quote:</label>
             <input type="number" name="quote" id="" min="0.000000001" required>
-            <input type="submit" value="Send Quote">
+            <input type="submit" value="Send Quote" id="quote">
         </form>
     </div>
 

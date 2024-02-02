@@ -1,9 +1,11 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'contract_status.css' %}">
 
     <h1 style="text-transform: capitalize;">{{ job.title }}'s Status</h1>
-    <div>
+    <div id="main">
         {% if job.status == JOB_STATUS_ACCEPTED%}
             <p>Status: Accpeted</p>
         {% elif job.status == JOB_STATUS_AVAILABLE%}

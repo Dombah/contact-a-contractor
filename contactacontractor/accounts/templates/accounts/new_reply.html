@@ -1,16 +1,18 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'new_reply.css' %}">
 
     <h1>Send Message</h1>
-    <div>
+    <div id="main">
         <form action="" method="post">
             {% csrf_token %}
             <label for="">To:</label>
             <input type="text" name="" id="" value="{{subject}}" readonly>
             <label for="">Message:</label>
             <input type="text" name="message" id="" required>
-            <input type="submit" value="Send Message">
+            <input type="submit" value="Send Message" id="button">
         </form>
     </div>
 

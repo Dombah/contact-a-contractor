@@ -1,8 +1,10 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-
-    <h1>Post new job</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'new_job.css' %}">
+<h1>Post new job</h1>
+<div id="main">
     <form action="" method="post">
         {% csrf_token %}
         <label for="">Title: </label>
@@ -11,24 +13,24 @@
         <input type="text" name="description" id=""> <br>
         <label for="">Location: </label>
         <input type="text" name="location" id=""> <br>
-        <div>
+        <div id="type">
             <label for="">Type: </label>
-            <input type="checkbox" name="type" id="" value="carpentry">Carpentry &nbsp
-            <input type="checkbox" name="type" id="" value="landscaping">Landscaping &nbsp
-            <input type="checkbox" name="type" id="" value="plumbing">Plumbing &nbsp
-            <input type="checkbox" name="type" id="" value="construction">Construction &nbsp
-            <input type="checkbox" name="type" id="" value="roofing">Roofing &nbsp
-            <input type="checkbox" name="type" id="" value="masonry">Masonry &nbsp
-            <input type="checkbox" name="type" id="" value="demolition">Demolition &nbsp
-            <input type="checkbox" name="type" id="" value="plastering">Plastering &nbsp
-            <input type="checkbox" name="type" id="" value="painting">Painting &nbsp
-            <input type="checkbox" name="type" id="" value="tile and marble setting">Tile and marble setting &nbsp
-            <input type="checkbox" name="type" id="" value="hvac">HVAC &nbsp
-            <input type="checkbox" name="type" id="" value="electrician">Electrician &nbsp
+            <input type="checkbox" name="type" id="" value="carpentry"><p>Carpentry &nbsp</p>
+            <input type="checkbox" name="type" id="" value="landscaping"><p>Landscaping &nbsp</p>
+            <input type="checkbox" name="type" id="" value="plumbing"><p>Plumbing &nbsp</p>
+            <input type="checkbox" name="type" id="" value="construction"><p>Construction &nbsp</p>
+            <input type="checkbox" name="type" id="" value="roofing"><p>Roofing &nbsp</p>
+            <input type="checkbox" name="type" id="" value="masonry"><p>Masonry &nbsp</p>
+            <input type="checkbox" name="type" id="" value="demolition"><p>Demolition &nbsp</p>
+            <input type="checkbox" name="type" id="" value="plastering"><p>Plastering &nbsp</p>
+            <input type="checkbox" name="type" id="" value="painting"><p>Painting &nbsp</p>
+            <input type="checkbox" name="type" id="" value="tile and marble setting"><p>Tile and marble setting &nbsp</p>
+            <input type="checkbox" name="type" id="" value="hvac"><p>HVAC &nbsp</p>
+            <input type="checkbox" name="type" id="" value="electrician"><p>Electrician &nbsp</p>
         </div>
         <label for="">Budget: </label>
         <input type="number" name="budget" id="" min="1"> <br>
-        <input type="submit" value="Post">
+        <input type="submit" value="Post" id="post">
     </form>
-
+</div>
 {% endblock content %}

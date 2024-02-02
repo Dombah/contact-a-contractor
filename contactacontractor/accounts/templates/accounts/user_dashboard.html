@@ -1,51 +1,55 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>User Dashboard</h1>
-    <div>
+<link rel="stylesheet" type="text/css" href="{% static 'user_dashboard.css' %}">
+ <h1>User Dashboard</h1>
+ 
+ <div id="head">     
+    <div id="main">
         <h2>Account Information</h2>
         <p>Username: {{ account.user.username }}</p>
         <p>Email: {{ account.user.email }}</p>
         <p>Balance: {{ account.balance }} €</p>
     </div>
-    <div>
+    <div id="main">
         <h2>Your Jobs</h2>
         {% if jobs %}
             {% for job in jobs %}
-                <div style="border: 1px solid black;">
+                <div style="border: 1px solid rgb(255, 255, 255);" id="table">
                     <h3>Title: {{ job.title }}</h3>
                     <p>Description: {{ job.description }}</p>
                     {% if job.is_completed %}
                         {% if not job.is_review_written %}
                             <a href="{% url 'accounts:submit_review' job.id %}">
-                                <input type="button" value="Submit Review">
+                                <input type="button" value="Submit Review" id="button">
                             </a>
                             <a href="{% url 'accounts:submit_dispute' job.id %}">
-                                <input type="button" value="Submit Dispute">
+                                <input type="button" value="Submit Dispute" id="button">
                             </a>
                         {% endif %}
                     {% else %}
                         {% if job.status == JOB_STATUS_AVAILABLE %}
                             <a href = "{% url 'accounts:view_quotes' job.id %}">
-                                <input type="button" value="View Submited Quotes">
+                                <input type="button" value="View Submited Quotes" id="button">
                             </a>
                         {% endif %}
                     {% endif %}
-                    <a href="{% url 'accounts:job_status' job.id %}"><button>View Status</button></a>
+                    <a href="{% url 'accounts:job_status' job.id %}"><button id="button">View Status</button></a>
                 </div>
             {% endfor %}
         {% else %}
             <p>No jobs yet!</p>
         {% endif %}
-    </div>
-    <div>
+    </div >
+    <div id="main">
         <h2>Your Messages</h2>
         {% if messages %}
             {% for message in messages %}
-                <div style="border: 1px solid black;">
+                <div style="border: 1px solid rgb(255, 255, 255);" id="table">
                     <h3>Sender: {{ message.sender }}:</h3>
                     <p>Message: {{ message.text }}</p>
-                    <a href="{% url 'accounts:new_reply' message.id %}"><button>Reply</button></a>
+                    <a href="{% url 'accounts:new_reply' message.id %}"><button id="button">Reply</button></a>
                 </div>
             {% endfor %}
         {% else %}
@@ -55,7 +59,7 @@
     <br>
     
     {% if not account.contractor %}
-        <p><a href="{% url 'accounts:become_contractor' %}">Sign up</a> to be a contractor!</p>
+        <p id="logout"><a href="{% url 'accounts:become_contractor' %}" id="signUp">Sign up</a> to be a contractor!</p>
     {% endif %}
-
+</div>
 {% endblock content %}

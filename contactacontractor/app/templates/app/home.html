@@ -1,13 +1,18 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>This is new app on the block!</h1>
-    <div>
-        <h2>Post a new job</h2>
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<div id="main">
+    <img src="https://www.fortunebuilders.com/wp-content/uploads/2021/10/Depositphotos_103173498_S-min.jpg" alt="contractor" style="width: 100%; height: 700px; object-fit: cover;" id="image">
+    <div id="leftColumn">
+        <h1 id="title">CONTACT<br> A<br> CONTRACTOR</h1>
+        <h2 id="subtitle">Post a new job!</h2>
         {% if request.user.is_authenticated %}
-            <p><a href="{% url 'new_job' %}">Post a Job</a></p>
+            <p id="post"><a href="{% url 'new_job' %}" id="link">Post a Job</a></p>
         {% else %}
-            <p><a href="{% url 'login' %}">Login</a> to post a job</p>
+            <p id="login"><a href="{% url 'login' %}" id="link">Login</a> to post a job</p>
         {% endif %}
-    </div>
+    </div>    
+</div>
 {% endblock content %}

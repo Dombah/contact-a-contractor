@@ -1,9 +1,14 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'contractor_profile.css' %}">
+<div id="head">
+
+</div>
   {% if account.contractor %}
     <h1 style="text-transform: capitalize;">{{ account.user.username }}'s Contractor Profile</h1>
-    <div>
+    <div id="main">
       <h2>Profile Information</h2>
       <p>First Name: {{ account.first_name }}</p>
       <p>Last Name: {{ account.last_name }}</p>
@@ -11,11 +16,11 @@
       <p>Rating: {{ rating }}&#9733;</p>
     </div>
 
-    <div>
+    <div id="main">
       <h2 style="text-transform: capitalize;">{{ account.user.username }}'s Reviews</h2>
       {% if reviews %}
         {% for review in reviews %}
-          <div style="border: 1px solid black;">
+          <div style="border: 1px solid rgb(255, 255, 255);" id="table">
             <p>By: {{ review.job.user }}</p>
             <p>
               Rating:{% for i in max_Rating_Range %}
@@ -35,13 +40,13 @@
     </div>
 
     {% if is_Owner %}
-      <div>
+      <div id="main">
         <h2 style="text-transform: capitalize;">{{ account.user.username }}'s Assigned Jobs</h2>
         {% if assigned_jobs %}
           {% for job in assigned_jobs %}
             <form method="post">
               {% csrf_token %}
-              <div style="border: 1px solid black">
+              <div style="border: 1px solid rgb(255, 255, 255)" id="table">
                 <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
                 <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
                 <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
@@ -50,13 +55,13 @@
                 <p>Budget: {{ job.budget }} €</p>
                 <p style="text-transform: capitalize;">Job Status: {{ job.status }}</p>
                 {% if job.status == JOB_STATUS_ACCEPTED %}
-                  <input type="submit" name="startJob" value="Start job" />
-                  <input type="hidden" name="form_type" value="start_Job" />
-                  <input type="hidden" name="job_id" value="{{ job.id }}" />
+                  <input type="submit" name="startJob" value="Start job" id="button"/>
+                  <input type="hidden" name="form_type" value="start_Job"/>
+                  <input type="hidden" name="job_id" value="{{ job.id }}"/>
                 {% endif %}
                 {% if job.status == JOB_STATUS_IN_PROGRESS %}
-                  <input type="submit" name="completeJob" value="Complete job" />
-                  <input type="hidden" name="form_type" value="complete_Job" />
+                  <input type="submit" name="completeJob" value="Complete job" id="button"/>
+                  <input type="hidden" name="form_type" value="complete_Job"/>
                   <input type="hidden" name="job_id" value="{{ job.id }}" />
                 {% endif %}
               </div>
@@ -68,11 +73,11 @@
       </div>
     {% endif %}
 
-    <div>
+    <div id="main">
       <h2 style="text-transform: capitalize;">{{ account.user.username }}'s Completed Jobs</h2>
       {% if completed_Contractor_Jobs %}
         {% for job in completed_Contractor_Jobs %}
-          <div style="border: 1px solid black">
+          <div style="border: 1px solid rgb(255, 255, 255)" id="table">
             <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
             <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
             <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
