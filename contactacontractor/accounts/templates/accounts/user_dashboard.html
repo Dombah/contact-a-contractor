@@ -16,27 +16,22 @@
                 <h3>Title: {{ job.title }}</h3>
                 <p>Description: {{ job.description }}</p>
                 {% if job.is_completed %}
-                    <p>Completed</p>
                     {% if not job.is_review_written %}
                         <a href="{% url 'accounts:submit_review' job.id %}">
-                            <input type="button" value="Submit a review">
+                            <input type="button" value="Submit Review">
                         </a>
                         <a href="{% url 'accounts:submit_dispute' job.id %}">
-                            <input type="button" value="Submit a dispute">
+                            <input type="button" value="Submit Dispute">
                         </a>
                     {% endif %}
                 {% else %}
-                    {% if job.status == JOB_STATUS_AVAILABLE %}
-                        <p>Status: Available</p>
+                    {% if job.status != JOB_STATUS_COMPLETE %}
                         <a href = "{% url 'accounts:view_quotes' job.id %}">
-                            <input type="button" value="View submited quotes">
+                            <input type="button" value="View Submited Quotes">
                         </a>
-                    {% elif job.status == JOB_STATUS_ACCEPTED %}
-                        <p>Status: Accepted</p>
-                    {% elif job.status == JOB_STATUS_IN_PROGRESS %}
-                        <p>Status: Pending</p>
                     {% endif %}
                 {% endif %}
+                <a href="{% url 'accounts:job_status' job.id %}"><button>View Status</button></a>
             </div>
         {% endfor %}
     </div>
@@ -69,6 +64,7 @@
                     <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
                     <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
                     <p>Budget: {{ job.budget }} €</p>
+                    <a href="{% url 'accounts:contract_status' job.id %}"><button>View Status</button></a>
                 </div>
             {% endfor %}
         </div>
