@@ -1,9 +1,12 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'user_profile.css' %}">
 
     <h1 style="text-transform: capitalize;">{{account.user.username}}'s Profile</h1>
-    <div>
+<div id="head">
+    <div id="main">
         <h2>Profile Information</h2>
         <p>First Name: {{account.first_name}}</p>
         <p>Last Name: {{account.last_name}}</p>
@@ -12,11 +15,11 @@
     </div>
     <div>
         {% if is_Owner %}
-            <div>
+            <div id="main">
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Accepted Jobs</h2>
                 {% if accepted_jobs %}
                     {% for job in accepted_jobs %}
-                        <div style="border: 1px solid black">
+                        <div style="border: 1px solid rgb(255, 255, 255)" id="table">
                             <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
                             <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
                             <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
@@ -30,11 +33,11 @@
                 {% endif %}
             </div>
         {% endif %}
-            <div>
+            <div id="main">
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
                 {% if completed_jobs %}
                     {% for job in completed_jobs %}
-                        <div style="border: 1px solid black">
+                        <div style="border: 1px solid rgb(255, 255, 255)" id="table">
                             <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
                             <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
                             <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
@@ -50,6 +53,8 @@
     </div>
     <br>
         {% if is_Owner and not account.contractor %}
-            <p><a href="{% url 'accounts:become_contractor' %}">Sign up</a> to be a contractor!</p>
+            <p id="box"><a href="{% url 'accounts:become_contractor' %}" id="hover">Sign up</a> to be a contractor!</p>
         {% endif %}
+</div>
+    
 {% endblock content %}

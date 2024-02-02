@@ -1,17 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Contact-a-Contractor</title>
-    <link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 </head>
 <body>
     <header>
         <nav>
+            <h1>Contact-a-Contractor</h1>
             <ul>
-                <h1>Welcome to Contact-a-Contractor</h1>
                 <li><a href="/">Home</a></li>
                 {% if request.user.is_authenticated %}
-                    Logged in: {{ request.user.username }}
+                    <p id="loggedIn">Logged in: {{ request.user.username }}</p>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% if request.user.is_superuser %}
                         <li><a href="/admin">Admin Dashboard</a></li>

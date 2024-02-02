@@ -1,14 +1,16 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'jobs.css' %}">
     <h1>Available Jobs</h1>
-    <div>
+    <div id="main">
         {% if not available_jobs %}
             <h3>There are currently no available jobs.</h3>
         {% else %}
             {% for job in available_jobs %}
                 {% if job.user != account.user %}
-                    <div style="border: 1px solid black;">
+                    <div style="border: 1px solid rgb(255, 255, 255);" id="table">
                         <h4>Title: {{ job.title }}</h4>
                         <p>Description: {{ job.description }}</p>
                         <p>Location: {{ job.location }}</p>
@@ -16,9 +18,9 @@
                         <p>Job Budget: {{ job.budget }} €</p>
                         <p><a href="../../accounts/profile/{{job.user.username}}">{{ job.user.username }}</a></p>
                         {% if account.contractor %}
-                            <a href="{% url 'new_quote' job.id %}"><button>Submit Quote</button></a>
+                            <a href="{% url 'new_quote' job.id %}"><button id="quote">Submit Quote</button></a>
                         {% endif %}
-                        <a href="{% url 'new_message' job.id %}"><button>Message User</button></a>
+                        <a href="{% url 'new_message' job.id %}"><button id="message">Message User</button></a>
                     </div>
                 {% endif %}
             {% endfor %}

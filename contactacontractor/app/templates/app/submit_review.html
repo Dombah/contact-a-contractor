@@ -1,15 +1,17 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container">
-        <h2>Submit Your Review</h2>
+<link rel="stylesheet" type="text/css" href="{% static 'submit_review.css' %}">
+<h1>Submit Your Review</h1>    
+    <div class="container" id="main">
         <form action="" method="POST">
             {% csrf_token %}
             <label for="message">Your Review:</label><br>
             <textarea id="message" name="message" rows="4" cols="100" min = "5" max ="200" required></textarea><br><br>
-            <label for="rating">Rating (1-5):</label><br>
+            <label for="rating">Rating (1-5):</label>
             <input type="number" id="rating" name="rating" min="1" max="5" required><br><br>
-            <input type="submit" value="Submit Review">
+            <input type="submit" value="Submit Review" id="button">
         </form>
     </div>
 {% endblock content %}

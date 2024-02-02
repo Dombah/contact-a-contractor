@@ -1,0 +1,45 @@
+#main{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 50%;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 40px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+#image{
+    grid-column: 2;
+    grid-row: 1;
+    border-radius: 40px;
+}
+
+#leftColumn{
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+div div h1{
+    margin-bottom: 100px;
+    font-size: 70px;
+}
+div div h2{
+    margin-bottom: 100px;
+    font-size: 40px;
+}
+div div p{
+    margin-bottom: 100px;
+    font-size: 30px;
+}
+
+#link:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,33 @@
+#main{
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 40%;
+    border-radius: 40px;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    position: sticky;
+    left: 30%;
+}
+
+main h1{
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: 100%;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+#button{
+    margin-top: 10px;
+    height: 35px;
+    width: 200px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+    border-color: white;
+    font-weight: 800;
+    padding-right: 20px;
+    padding-left: 20px;
+}

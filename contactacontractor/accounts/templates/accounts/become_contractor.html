@@ -1,14 +1,15 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'become_contractor.css' %}">
     <h1>Become a contractor!</h1>
-    <div>
+    <div id="main">
         <form action="" method="post">
             {% csrf_token %}
             <label for="">Become a contractor: </label>
             <input type="checkbox" name="contractor" id=""> Yes <br>
-            <input type="submit" value="Sign Up">
+            <input type="submit" value="Sign Up" id="button">
         </form>
     </div>
 

@@ -1,17 +1,19 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'view_quotes.css' %}">
     <h1>Quotes for Your Job</h1>
-    <div id="quotes">
+    <div id="quote">
         {% if quotes %}
             {% for quote in quotes %}
-                <div class="quote" style = "border: 1px solid">
+                <div class="quote" style = "border: 1px solid" id="table">
                     <form action="" method="POST">
                         {% csrf_token %}
                         <p>{{ error }}</p>
                         <p><strong>Contractor:</strong> {{ quote.contractor.username }}</p>
                         <p><strong>Quote Amount:</strong> {{ quote.price }} €</p>
-                        <input type="submit" name="accept" value="Accept">
+                        <input type="submit" name="accept" value="Accept" id="button">
                         <input type="hidden" name="quote_id" value="{{ quote.id }}">
                     </form>
                 </div>

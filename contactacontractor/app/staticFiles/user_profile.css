@@ -1,0 +1,47 @@
+#main{
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 80%;
+    border-radius: 40px;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    position: sticky;
+    left: 10%;
+}
+main h1{
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: 100%;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+#table{
+    border-radius: 40px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#table:last-child{
+    margin-bottom: 0px;
+}
+
+h2{
+    margin-bottom: 10px;
+}
+
+#box{
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 20%;
+    border-radius: 40px;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    position: sticky;
+    left: 40%;
+}
+
+#hover:hover{
+    text-decoration: underline;
+}
