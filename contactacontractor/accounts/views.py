@@ -47,7 +47,7 @@ def user_dashboard(request):
     }
     return render(request, "accounts/user_dashboard.html", context)
 
-def user_profile(request, username):
+def contractor_profile(request, username):
     account = Account.objects.get(user__username=username)
     is_Owner = account.user == request.user
 
@@ -59,37 +59,41 @@ def user_profile(request, username):
             job_id = request.POST.get("job_id")
             setJobComplete(job_id)
             updateContractorBalance(Quote.objects.get(job_id = job_id).id)
-            
+    
+    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
+    completed_Contractor_Jobs = completed_Contractor_Jobs = Job.objects.filter(quote__contractor=account.user, is_completed=True)
+    reviews = Rating.objects.filter(ratee = account.user) 
+    context = {
+        'account': account,
+        'is_Owner': is_Owner,
+        'completed_Contractor_Jobs': completed_Contractor_Jobs,
+        'assigned_jobs': assigned_jobs,
+        'rating' : calculate_rating(request),
+        'reviews' : reviews,
+        'max_Rating_Range' : range(5),
+        'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
+        'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
+    }
+    return render(request, "accounts/contractor_profile.html", context)
+
+def user_profile(request, username):
+    account = Account.objects.get(user__username=username)
+    is_Owner = account.user == request.user
+    completed_jobs = [job for job in Job.objects.all() if job.user.username == account.user.username and job.is_completed == True]
     if(is_Owner):
-        submitted_jobs = [quote.job for quote in Quote.objects.all() if quote.contractor.username == request.user.username]
-        assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username]
-        done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == request.user.username]
         accepted_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.status == "accepted"]
-        completed_jobs = [job for job in Job.objects.all() if job.user.username == request.user.username and job.is_completed == True]
-        assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
-        completed_Contractor_Jobs = completed_Contractor_Jobs = Job.objects.filter(quote__contractor=request.user, is_completed=True) 
         context = {
             'account': account,
-            'submitted_jobs': submitted_jobs,
-            'assigned_jobs': assigned_jobs,
-            'done_jobs': done_jobs,
             'accepted_jobs': accepted_jobs,
             'completed_jobs': completed_jobs,
-            'completed_Contractor_Jobs': completed_Contractor_Jobs,
-            'rating' : calculate_rating(request),
-            'reviews' : Rating.objects.filter(ratee = request.user),
             'is_Owner': is_Owner,
-            'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
-            'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
         }
         return render(request, "accounts/user_profile.html", context)
     else:
         done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == account.user.username]
         context = {
             'account': account,
-            'done_jobs': done_jobs,
-            'rating' : calculate_rating(request),
-            'reviews' : Rating.objects.filter(ratee = account.user),
+            'completed_jobs': completed_jobs,
             'is_Owner': is_Owner,
         }
         return render(request, "accounts/user_profile.html", context)
@@ -129,7 +133,7 @@ def calculate_rating(request):
         total += rate.rating
     if len(rating) == 0:
         return 0
-    return total / len(rating)
+    return round(total / len(rating), 2)
 
 def confirm_quote(request, quote_id):
       if request.method == "POST":

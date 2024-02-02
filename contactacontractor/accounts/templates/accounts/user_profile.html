@@ -28,6 +28,7 @@
                     <p>No accepted jobs yet!</p>
                 {% endif %}
             </div>
+        {% endif %}
             <div>
                 <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
                 {% if completed_jobs %}
@@ -45,104 +46,9 @@
                     <p>No completed jobs yet!</p>
                 {% endif %}
             </div>
-        {% endif %}
     </div>
     <br>
-    {% if account.contractor %}
-        <h1 style="text-transform: capitalize;">{{account.user.username}}'s Contractor Profile</h1>
-        <div>
-            <h2>Profile Information</h2>
-            <p>First Name: {{account.first_name}}</p>
-            <p>Last Name: {{account.last_name}}</p>
-            <p>Email: {{account.user.email}}</p>
-            <p>Rating: {{rating}} &#9733;</p> <!-- &#9733; is the star symbol -->
-        </div>
-        <div>
-            <div>
-                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Reviews</h2>
-                {% if reviews %}
-                    {% for review in reviews %}
-                        <div style="border: 1px solid black;">
-                            <p>By: {{review.job.user}}</p>
-                            <p>{{review.rating}} &#9733;</p></p>
-                            <p>{{review.review}}</p>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No reviews yet!</p>
-                {% endif %}
-            </div>
-            {% if is_Owner %}
-                <div>
-                    <h2 style="text-transform: capitalize;">{{account.user.username}}'s Submitted Jobs</h2>
-                    {% if submitted_jobs %}
-                        {% for job in submitted_jobs %}
-                            <div style="border: 1px solid black">
-                                <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                                <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                                <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                                <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                                <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                                <p>Budget: {{ job.budget }} €</p>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No submitted jobs yet!</p>
-                    {% endif %}
-                </div>
-                <div>
-                    <h2 style="text-transform: capitalize;">{{account.user.username}}'s Assigned Jobs</h2>
-                    {% if assigned_jobs %}
-                        {% for job in assigned_jobs %}
-                            <form method="post">
-                                {% csrf_token %}
-                                <div style="border: 1px solid black">
-                                    <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                                    <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                                    <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                                    <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                                    <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                                    <p>Budget: {{ job.budget }} €</p>
-                                    <p style="text-transform: capitalize;">Job Status: {{ job.status }}</p>
-                                    {% if job.status == JOB_STATUS_ACCEPTED %}
-                                        <input type="submit" name="startJob" value="Start job">
-                                        <input type="hidden" name="form_type" value="start_Job">
-                                        <input type="hidden" name="job_id" value="{{job.id}}">
-                                    {% endif %}
-                                    {% if job.status == JOB_STATUS_IN_PROGRESS %}
-                                        <input type="submit" name="completeJob" value="Complete job">
-                                        <input type="hidden" name="form_type" value="complete_Job">
-                                        <input type="hidden" name="job_id" value="{{job.id}}">
-                                    {% endif %}
-                                </div>
-                            </form>
-                        {% endfor %}
-                    {% else %}
-                        <p>No assigned jobs yet!</p>
-                    {% endif %}
-                </div>
-            {% endif %}
-            <div>
-                <h2 style="text-transform: capitalize;">{{account.user.username}}'s Completed Jobs</h2>
-                {% if completed_Contractor_Jobs %}
-                    {% for job in completed_Contractor_Jobs %}
-                        <div style="border: 1px solid black">
-                            <h3 style="text-transform: capitalize;">Title: {{ job.title }}</h3>
-                            <p style="text-transform: capitalize;">Description: {{ job.description }}</p>
-                            <p style="text-transform: capitalize;">Job issuer: {{ job.user.username }}</p>
-                            <p style="text-transform: capitalize;">Location: {{ job.location }}</p>
-                            <p style="text-transform: capitalize;">Job Type: {{ job.type }}</p>
-                            <p>Budget: {{ job.budget }} €</p>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No completed jobs yet!</p>
-                {% endif %}
-            </div>
-        </div>
-    {% else %}
-        {% if is_Owner %}
+        {% if is_Owner and not account.contractor %}
             <p><a href="{% url 'accounts:become_contractor' %}">Sign up</a> to be a contractor!</p>
         {% endif %}
-    {% endif %}
 {% endblock content %}

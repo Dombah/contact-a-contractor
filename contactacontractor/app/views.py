@@ -13,10 +13,10 @@ def new_job(request):
             title = request.POST.get("title")
             description = request.POST.get("description")
             location = request.POST.get("location")
-            type = request.POST.get("type")
+            types = request.POST.getlist("type")
+            type = ", ".join(types)
             budget = request.POST.get("budget")
             is_completed = False
-
             job = Job(user = user, title = title, description = description, location = location, type = type, budget = budget, is_completed = is_completed)
             job.save()
 
@@ -93,7 +93,7 @@ def view_quotes(request, job_id):
 
 def available_jobs(request):
       account = Account.objects.get(user=request.user)
-      available_jobs = [job for job in Job.objects.all() if job.status == "available"]
+      available_jobs = [job for job in Job.objects.all() if job.status == "available" and job.user != request.user]
       context = {
             'account': account,
             'available_jobs': available_jobs,

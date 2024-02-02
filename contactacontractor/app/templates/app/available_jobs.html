@@ -7,18 +7,20 @@
             <h3>There are currently no available jobs.</h3>
         {% else %}
             {% for job in available_jobs %}
-                <div style="border: 1px solid black;">
-                    <h4>Title: {{ job.title }}</h4>
-                    <p>Description: {{ job.description }}</p>
-                    <p>Location: {{ job.location }}</p>
-                    <p>Job Type: {{ job.type }}</p>
-                    <p>Job Budget: {{ job.budget }} €</p>
-                    <p><a href="../../accounts/profile/{{job.user.username}}">{{ job.user.username }}</a></p>
-                    {% if account.contractor %}
-                        <a href="{% url 'new_quote' job.id %}"><button>Submit Quote</button></a>
-                    {% endif %}
-                    <a href="{% url 'new_message' job.id %}"><button>Message User</button></a>
-                </div>
+                {% if job.user != account.user %}
+                    <div style="border: 1px solid black;">
+                        <h4>Title: {{ job.title }}</h4>
+                        <p>Description: {{ job.description }}</p>
+                        <p>Location: {{ job.location }}</p>
+                        <p>Job Type: {{ job.type }}</p>
+                        <p>Job Budget: {{ job.budget }} €</p>
+                        <p><a href="../../accounts/profile/{{job.user.username}}">{{ job.user.username }}</a></p>
+                        {% if account.contractor %}
+                            <a href="{% url 'new_quote' job.id %}"><button>Submit Quote</button></a>
+                        {% endif %}
+                        <a href="{% url 'new_message' job.id %}"><button>Message User</button></a>
+                    </div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>

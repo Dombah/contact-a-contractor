@@ -16,13 +16,14 @@ Including another URLconf
 """
 
 from django.urls import path
-from accounts.views import register, user_dashboard, user_profile, become_contractor, new_reply, confirm_quote, job_status, contract_status
+from accounts.views import register, user_dashboard, user_profile, become_contractor, new_reply, confirm_quote, job_status, contract_status, contractor_profile
 from app.views import submit_dispute, submit_review, view_quotes
 
 app_name = "accounts"
 urlpatterns = [
     path('register/', register, name='register'),
     path('dashboard/', user_dashboard, name='user_dashboard'),
+    path('contractor/<str:username>', contractor_profile, name='contractor_profile'),
     path('profile/<str:username>', user_profile, name='user_profile'),
     path('dashboard/submit-dispute/<int:job_id>/', submit_dispute, name='submit_dispute'),
     path('dashboard/submit-review/<int:job_id>/', submit_review, name='submit_review'),

@@ -18,6 +18,9 @@
                     {% else %}
                         <li><a href="{% url 'accounts:user_dashboard' %}">User Dashboard</a></li>
                         <li><a href="{% url 'accounts:user_profile' request.user.username %}">User Profile</a></li>
+                        {% if request.user.account.contractor %}
+                            <li><a href="{% url 'accounts:contractor_profile' request.user.username %}">Contractor Profile</a></li>
+                        {% endif %}
                         <li><a href="{% url 'available_jobs' %}">Jobs</a></li>
                     {% endif %}
                 {% else %}
