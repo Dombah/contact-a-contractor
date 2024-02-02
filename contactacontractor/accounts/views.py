@@ -59,22 +59,34 @@ def contractor_profile(request, username):
             job_id = request.POST.get("job_id")
             setJobComplete(job_id)
             updateContractorBalance(Quote.objects.get(job_id = job_id).id)
-    
-    assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
+
     completed_Contractor_Jobs = completed_Contractor_Jobs = Job.objects.filter(quote__contractor=account.user, is_completed=True)
     reviews = Rating.objects.filter(ratee = account.user) 
-    context = {
-        'account': account,
-        'is_Owner': is_Owner,
-        'completed_Contractor_Jobs': completed_Contractor_Jobs,
-        'assigned_jobs': assigned_jobs,
-        'rating' : calculate_rating(request),
-        'reviews' : reviews,
-        'max_Rating_Range' : range(5),
-        'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
-        'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
-    }
-    return render(request, "accounts/contractor_profile.html", context)
+    
+    if(is_Owner):
+        assigned_jobs = [quote.job for quote in Quote.objects.all() if quote.accepted == True and quote.contractor.username == request.user.username and not quote.job.is_completed]
+        context = {
+            'account': account,
+            'is_Owner': is_Owner,
+            'completed_Contractor_Jobs': completed_Contractor_Jobs,
+            'assigned_jobs': assigned_jobs,
+            'rating' : calculate_rating(account=account),
+            'reviews' : reviews,
+            'max_Rating_Range' : range(5),
+            'JOB_STATUS_IN_PROGRESS': Job.JOB_STATUS_IN_PROGRESS,
+            'JOB_STATUS_ACCEPTED': Job.JOB_STATUS_ACCEPTED,
+        }
+        return render(request, "accounts/contractor_profile.html", context)
+    else:
+        context = {
+            'account': account,
+            'is_Owner': is_Owner,
+            'completed_Contractor_Jobs': completed_Contractor_Jobs,
+            'rating' : calculate_rating(account=account),
+            'reviews' : reviews,
+            'max_Rating_Range' : range(5),
+        }
+        return render(request, "accounts/contractor_profile.html", context)
 
 def user_profile(request, username):
     account = Account.objects.get(user__username=username)
@@ -90,7 +102,6 @@ def user_profile(request, username):
         }
         return render(request, "accounts/user_profile.html", context)
     else:
-        done_jobs = [quote.job for quote in Quote.objects.all() if quote.job.is_completed == True and quote.contractor.username == account.user.username]
         context = {
             'account': account,
             'completed_jobs': completed_jobs,
@@ -126,8 +137,8 @@ def new_reply(request, message_id):
       }
       return render(request, 'accounts/new_reply.html', context)
 
-def calculate_rating(request):
-    rating = Rating.objects.filter(ratee = request.user)
+def calculate_rating(account):
+    rating = Rating.objects.filter(ratee = account.user)
     total = 0
     for rate in rating:
         total += rate.rating
